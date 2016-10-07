@@ -35,11 +35,11 @@ module.exports = function (RED) {
         // {friendlyName: "TV", port: 9001, serial: 'a unique id'}
         var connection = wemore.Emulate(config);
 
-        connection.on('on', function() {
+        connection.on('on', function () {
             node.send({topic: config.onTopic, payload: config.onPayload});
         });
 
-        connection.on('off', function() {
+        connection.on('off', function () {
             node.send({topic: config.offTopic, payload: config.offPayload});
         });
 

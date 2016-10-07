@@ -1,8 +1,18 @@
 {
     "name": "node-red-contrib-wemo-emulator",
     "version": "0.1.0",
+    "main": "index.js",
     "dependencies": {
         "wemore": "^0.3.0"
+    },
+    "author": "@biddster",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/biddster/node-red-contrib-wemo-emulator.git"
+    },
+    "bugs": {
+        "url": "https://github.com/biddster/node-red-contrib-wemo-emulator/issues"
     },
     "node-red": {
         "nodes": {
