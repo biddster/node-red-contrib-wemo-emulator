@@ -1,0 +1,96 @@
+<!--
+The MIT License (MIT)
+
+Copyright (c) 2016 @biddster
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+-->
+
+<script type="text/javascript">
+    RED.nodes.registerType('wemo-emulator', {
+        category: 'input',
+        color: '#f37a33',
+        defaults: {
+            name: {value: ''},
+            friendlyName: {value: ''},
+            serial: {value: ''},
+            port: {value: ''},
+            onTopic: {value: ''},
+            onPayload: {value: ''},
+            offTopic: {value: ''},
+            offPayload: {value: ''}
+        },
+        inputs: 0,
+        outputs: 1,
+        icon: 'wemo.png',
+        label: function () {
+            return this.name || 'wemo-emulator';
+        },
+        paletteLabel: 'wemo emu',
+        align: 'left'
+    });
+</script>
+
+<script type="text/x-red" data-template-name="wemo-emulator">
+
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i>Node Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+
+    <hr>
+    <div class="form-row">
+        <label for="node-input-friendlyName"><i class="icon-tag"></i>Friendly Name</label>
+        <input type="text" id="node-input-friendlyName" placeholder="Friendly Name">
+    </div>
+    <div class="form-row">
+		<label for="node-input-serial"><i class="fa fa-globe"></i> Unique ID</label>
+		<input type="text" id="node-input-serial" placeholder="Unique ID">
+	</div>
+	<div class="form-row">
+		<label for="node-input-port"><i class="fa fa-globe"></i> Port</label>
+		<input type="text" id="node-input-port" placeholder="Port">
+	</div>
+
+	<hr>
+    <div class="form-row">
+        <label for="node-input-onTopic"><i class="icon-tag"></i>On Topic</label>
+        <input type="text" id="node-input-onTopic" placeholder="">
+    </div>
+    <div class="form-row">
+        <label for="node-input-onPayload"><i class="icon-tag"></i>On Payload</label>
+        <input type="text" id="node-input-onPayload" placeholder="">
+    </div>
+
+    <hr>
+    <div class="form-row">
+        <label for="node-input-offTopic"><i class="icon-tag"></i>Off Topic</label>
+        <input type="text" id="node-input-offTopic" placeholder="">
+    </div>
+    <div class="form-row">
+        <label for="node-input-offPayload"><i class="icon-tag"></i>Off Payload</label>
+        <input type="text" id="node-input-offPayload" placeholder="">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="wemo-emulator">
+    <h1>Wemo Emulator</h1>
+    <p>FIXME</p>
+
+</script>
