@@ -56,15 +56,15 @@ THE SOFTWARE.
 
     <hr>
     <div class="form-row">
-        <label for="node-input-friendlyName"><i class="icon-tag"></i>Friendly Name</label>
+        <label for="node-input-friendlyName"><i class="icon-tag"></i>Friendly Name *</label>
         <input type="text" id="node-input-friendlyName" placeholder="Friendly Name">
     </div>
     <div class="form-row">
-		<label for="node-input-serial"><i class="fa fa-globe"></i> Unique ID</label>
+		<label for="node-input-serial"><i class="fa fa-globe"></i> Unique ID *</label>
 		<input type="text" id="node-input-serial" placeholder="Unique ID">
 	</div>
 	<div class="form-row">
-		<label for="node-input-port"><i class="fa fa-globe"></i> Port</label>
+		<label for="node-input-port"><i class="fa fa-globe"></i> Port *</label>
 		<input type="text" id="node-input-port" placeholder="Port">
 	</div>
 
@@ -125,7 +125,8 @@ Drag the node on to your workspace, configure it as below and then ask Alexa to 
 </tr>
 <tr>
 <td><code>Port</code></td>
-<td>Wemore automatically selects a port to listen on, but you have the option to choose one (possibly to help with firewalls)</td>
+<td>Wemore can automatically select a port to listen on, but it is recommended that you enter a unique port and increment it for each wemo
+ emulator node you add to your workspace. This ensures that the port never changes.</td>
 </tr>
 <tr>
 <td><code>On Topic</code></td>
