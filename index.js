@@ -26,31 +26,44 @@ module.exports = function (RED) {
     'use strict';
 
     var wemore = require('wemore');
+    var domain = require('domain');
 
     RED.nodes.registerType('wemo-emulator', function (config) {
 
         RED.nodes.createNode(this, config);
         var node = this;
 
-        // {friendlyName: "TV", port: 9001, serial: 'a unique id'}
-        var connection = wemore.Emulate(config);
+        // Address in use errors occur when ports clash. They stop node dead so we use a domain to notify the user.
+        // Otherwise NodeRED won't start and that's hard to debug.
+        // Note that domains are deprecated in v7. So we'll have to port to whatever replaces them in the future.
+        var d = domain.create();
 
-        connection.on('listening', function () {
-            node.status({fill: 'yellow', shape: 'dot', text: 'Listen on ' + this.port});
+        d.on('error', function (e) {
+            node.error('Emulation error: ' + e.message, e);
+            node.status({fill: 'red', shape: 'dot', text: e.message});
         });
 
-        connection.on('on', function () {
-            node.send({topic: config.onTopic, payload: config.onPayload});
-            node.status({fill: 'green', shape: 'dot', text: 'on'});
-        });
+        d.run(function () {
+            // {friendlyName: "TV", port: 9001, serial: 'a unique id'}
+            var connection = wemore.Emulate(config);
 
-        connection.on('off', function () {
-            node.send({topic: config.offTopic, payload: config.offPayload});
-            node.status({fill: 'green', shape: 'circle', text: 'off'});
-        });
+            connection.on('listening', function () {
+                node.status({fill: 'yellow', shape: 'dot', text: 'Listen on ' + this.port});
+            });
 
-        node.on('close', function () {
-            connection.close();
+            connection.on('on', function () {
+                node.send({topic: config.onTopic, payload: config.onPayload});
+                node.status({fill: 'green', shape: 'dot', text: 'on'});
+            });
+
+            connection.on('off', function () {
+                node.send({topic: config.offTopic, payload: config.offPayload});
+                node.status({fill: 'green', shape: 'circle', text: 'off'});
+            });
+
+            node.on('close', function () {
+                connection.close();
+            });
         });
     });
 };
