@@ -43,7 +43,7 @@ module.exports = function (RED) {
             };
 
         function getGlobalConfig() {
-            return _.assign(globalConfig, node.name && node.context().global.get(node.name) || node.context().global.get('wemo-emulator'));
+            return _.assign(globalConfig, node.context().global.get('wemo-emulator'));
         }
 
         function debug() {
