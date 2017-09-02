@@ -29,4 +29,8 @@ Drag the node on to your workspace, configure it as below and then ask Alexa to 
 | `Off Topic`   | This is the topic sent when you ask Alexa to turn your thing off |
 | `Off Payload`   | This is the payload sent when you ask Alexa to turn your thing off |
 
+### Troubleshooting
+If Alexa can't discover the devices emulated by this node, please check you don't have a firewall blocking the following ports:
+ - 1900/udp
+ - You must also open the ports for all of the wemo emulator nodes configured
 
