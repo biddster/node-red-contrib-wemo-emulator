@@ -36,6 +36,6 @@ If Alexa can't discover the devices emulated by this node, please check you don'
 
 ### Enabling extra debugging
 
-Install `node-red-contrib-config` and drag a config node into your workspace. Configure the node to set a global variable called `topic-timeframe-trigger` 
+Install `node-red-contrib-config` and drag a config node into your workspace. Configure the node to set a global variable called `wemo-emulator` 
 with a JSON value of `{"debug": true}`. Also make sure that the config tickbox for `active` is unchecked. Redeploy. Now click the button on the config node. 
-This will trigger all instances of `topic-timeframe-trigger` to write extra logging to the os syslog next time they're invoked.
+This will trigger all instances of `wemo-emulator` to write extra logging to the os syslog next time they're invoked.
