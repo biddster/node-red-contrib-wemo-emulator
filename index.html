@@ -27,14 +27,30 @@ THE SOFTWARE.
         category: 'input',
         color: '#f37a33',
         defaults: {
-            name: {value: ''},
-            friendlyName: {value: ''},
-            serial: {value: ''},
-            port: {value: ''},
-            onTopic: {value: ''},
-            onPayload: {value: ''},
-            offTopic: {value: ''},
-            offPayload: {value: ''}
+            name: {
+                value: ''
+            },
+            friendlyName: {
+                value: ''
+            },
+            serial: {
+                value: ''
+            },
+            port: {
+                value: ''
+            },
+            onTopic: {
+                value: ''
+            },
+            onPayload: {
+                value: ''
+            },
+            offTopic: {
+                value: ''
+            },
+            offPayload: {
+                value: ''
+            }
         },
         inputs: 0,
         outputs: 1,
@@ -60,15 +76,15 @@ THE SOFTWARE.
         <input type="text" id="node-input-friendlyName" placeholder="Friendly Name">
     </div>
     <div class="form-row">
-		<label for="node-input-serial"><i class="fa fa-globe"></i> Unique ID *</label>
-		<input type="text" id="node-input-serial" placeholder="Unique ID">
-	</div>
-	<div class="form-row">
-		<label for="node-input-port"><i class="fa fa-globe"></i> Port *</label>
-		<input type="text" id="node-input-port" placeholder="Port">
-	</div>
+        <label for="node-input-serial"><i class="fa fa-globe"></i> Unique ID *</label>
+        <input type="text" id="node-input-serial" placeholder="Unique ID">
+    </div>
+    <div class="form-row">
+        <label for="node-input-port"><i class="fa fa-globe"></i> Port *</label>
+        <input type="text" id="node-input-port" placeholder="Port">
+    </div>
 
-	<hr>
+    <hr>
     <div class="form-row">
         <label for="node-input-onTopic"><i class="icon-tag"></i>On Topic</label>
         <input type="text" id="node-input-onTopic" placeholder="">
@@ -92,58 +108,71 @@ THE SOFTWARE.
 
 <script type="text/x-red" data-help-name="wemo-emulator">
     <h1>Wemo Emulator</h1>
-    <p> Why might you want to emulate Wemo?  Well I wanted to be able to control my Node-RED Raspberry Pi using my Amazon Echo. The
-Echo has Wemo support built in so I thought I'd give it a try.<p>
-<p>
-It's pretty cool to be able to say 'Alexa, turn my garden watering system on' and my Pi turns on the outdoor watering system.
-</p>
-<p>
-This Node-RED node is only a slim wrapper around the marvellous [wemore](https://github.com/dhleong/wemore) Wemo library written by Daniel Leong.
-</p>
-<h2>Configuration</h2>
-<p>
-Drag the node on to your workspace, configure it as below and then ask Alexa to discover devices.
-</p>
+    <p> Why might you want to emulate Wemo? Well I wanted to be able to control my Node-RED Raspberry Pi using my Amazon Echo.
+        The Echo has Wemo support built in so I thought I'd give it a try.
+        <p>
+            <p>
+                It's pretty cool to be able to say 'Alexa, turn my garden watering system on' and my Pi turns on the outdoor watering system.
+            </p>
+            <p>
+                This Node-RED node is only a slim wrapper around the marvellous [wemore](https://github.com/dhleong/wemore) Wemo library
+                written by Daniel Leong.
+            </p>
+            <h2>Configuration</h2>
+            <p>
+                Drag the node on to your workspace, configure it as below and then ask Alexa to discover devices.
+            </p>
 
-<table><thead>
-<tr>
-<th>Config</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><code>Node Name</code></td>
-<td>This is the name of the node as it appears in the Node-RED workspace</td>
-</tr>
-<tr>
-<td><code>Friendly Name</code></td>
-<td>This is the name that you'll see in the list of devices known to Alexa, it's also the name that you use in voice commands</td>
-</tr>
-<tr>
-<td><code>Unique ID</code></td>
-<td>This ID should be unique across all the wemo-emulator nodes in your workspace</td>
-</tr>
-<tr>
-<td><code>Port</code></td>
-<td>Wemore can automatically select a port to listen on, but it is recommended that you enter a unique port and increment it for each wemo
- emulator node you add to your workspace. This ensures that the port never changes.</td>
-</tr>
-<tr>
-<td><code>On Topic</code></td>
-<td>This is the topic sent when you ask Alexa to turn your thing on</td>
-</tr>
-<tr>
-<td><code>On Payload</code></td>
-<td>This is the payload sent when you ask Alexa to turn your thing on</td>
-</tr>
-<tr>
-<td><code>Off Topic</code></td>
-<td>This is the topic sent when you ask Alexa to turn your thing off</td>
-</tr>
-<tr>
-<td><code>Off Payload</code></td>
-<td>This is the payload sent when you ask Alexa to turn your thing off</td>
-</tr>
-</tbody></table>
-
+            <table>
+                <thead>
+                    <tr>
+                        <th>Config</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>Node Name</code></td>
+                        <td>This is the name of the node as it appears in the Node-RED workspace</td>
+                    </tr>
+                    <tr>
+                        <td><code>Friendly Name</code></td>
+                        <td>This is the name that you'll see in the list of devices known to Alexa, it's also the name that you
+                            use in voice commands</td>
+                    </tr>
+                    <tr>
+                        <td><code>Unique ID</code></td>
+                        <td>This ID should be unique across all the wemo-emulator nodes in your workspace</td>
+                    </tr>
+                    <tr>
+                        <td><code>Port</code></td>
+                        <td>Wemore can automatically select a port to listen on, but it is recommended that you enter a unique
+                            port and increment it for each wemo emulator node you add to your workspace. This ensures that
+                            the port never changes.</td>
+                    </tr>
+                    <tr>
+                        <td><code>On Topic</code></td>
+                        <td>This is the topic sent when you ask Alexa to turn your thing on</td>
+                    </tr>
+                    <tr>
+                        <td><code>On Payload</code></td>
+                        <td>This is the payload sent when you ask Alexa to turn your thing on</td>
+                    </tr>
+                    <tr>
+                        <td><code>Off Topic</code></td>
+                        <td>This is the topic sent when you ask Alexa to turn your thing off</td>
+                    </tr>
+                    <tr>
+                        <td><code>Off Payload</code></td>
+                        <td>This is the payload sent when you ask Alexa to turn your thing off</td>
+                    </tr>
+                </tbody>
+            </table>
+            <h2>Troubleshooting</h2>
+            If Alexa can't discover the devices emulated by this node, please check you don't have a firewall blocking the following
+            ports:
+            <ul>
+                <li>1900/udp</li>
+                <li>You must also open the ports for all of the wemo emulator nodes configured.</li>
+            </ul>
 </script>
