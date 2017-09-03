@@ -34,3 +34,8 @@ If Alexa can't discover the devices emulated by this node, please check you don'
  - 1900/udp
  - You must also open the ports for all of the wemo emulator nodes configured
 
+### Enabling extra debugging
+
+Install `node-red-contrib-config` and drag a config node into your workspace. Configure the node to set a global variable called `wemo-emulator` 
+with a JSON value of `{"debug": true}`. Also make sure that the config tickbox for `active` is unchecked. Redeploy. Now click the button on the config node. 
+This will trigger all instances of `wemo-emulator` to write extra logging to the os syslog next time they're invoked.
