@@ -10,6 +10,9 @@
     "echo",
     "alexa"
   ],
+  "scripts": {
+    "test": "node_modules/.bin/mocha -R spec ./tests/test.js"
+  },
   "dependencies": {
     "lodash": "^4.17.4",
     "wemore": "^0.4.1"
@@ -30,7 +33,9 @@
   },
   "devDependencies": {
     "eslint": "^3.19.0",
-    "eslint-config-biddster": "^0.3.0"
+    "eslint-config-biddster": "^0.3.0",
+    "mocha": "^3.5.0",
+    "node-red-contrib-mock-node": "^0.3.0"
   },
   "eslintConfig": {
     "env": {
