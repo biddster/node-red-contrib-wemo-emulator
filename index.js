@@ -73,10 +73,11 @@ module.exports = function(RED) {
                     });
                     debug(`Listening on: ${this.port}`);
                 })
-                .on('on', function() {
+                .on('on', function(self, sender) {
                     node.send({
                         topic: config.onTopic,
-                        payload: config.onPayload
+                        payload: config.onPayload,
+                        sender: sender
                     });
                     node.status({
                         fill: 'green',
@@ -85,10 +86,11 @@ module.exports = function(RED) {
                     });
                     debug('Turning on');
                 })
-                .on('off', function() {
+                .on('off', function(self, sender) {
                     node.send({
                         topic: config.offTopic,
-                        payload: config.offPayload
+                        payload: config.offPayload,
+                        sender: sender
                     });
                     node.status({
                         fill: 'green',

@@ -26,7 +26,7 @@
     },
     "devDependencies": {
         "eslint": "^4.16.0",
-        "eslint-config-biddster": "^0.5.0",
+        "eslint-config-biddster": "^0.6.0",
         "eslint-config-prettier": "^2.9.0",
         "mocha": "^5.0.0",
         "node-red-contrib-mock-node": "^0.4.0",
