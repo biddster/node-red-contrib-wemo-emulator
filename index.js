@@ -21,11 +21,10 @@
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  THE SOFTWARE.
  */
+'use strict';
 
-module.exports = function (RED) {
-    'use strict';
-
-    var wemore = require('wemore'),
+module.exports = function(RED) {
+    const wemore = require('wemore'),
         domain = require('domain'),
         _ = require('lodash');
 
@@ -34,13 +33,10 @@ module.exports = function (RED) {
     // https://github.com/biddster/node-red-contrib-wemo-emulator/issues/8
     process.setMaxListeners(0);
 
-    RED.nodes.registerType('wemo-emulator', function (config) {
-
+    RED.nodes.registerType('wemo-emulator', function(config) {
         RED.nodes.createNode(this, config);
-        var node = this,
-            globalConfig = {
-                debug: false
-            };
+        const node = this,
+            globalConfig = { debug: false };
 
         function getGlobalConfig() {
             return _.assign(globalConfig, node.context().global.get('wemo-emulator'));
@@ -53,10 +49,10 @@ module.exports = function (RED) {
         // Address in use errors occur when ports clash. They stop node dead so we use a domain to notify the user.
         // Otherwise NodeRED won't start and that's hard to debug.
         // Note that domains are deprecated in v7. So we'll have to port to whatever replaces them in the future.
-        var d = domain.create();
+        const d = domain.create();
 
-        d.on('error', function (e) {
-            node.error('Emulation error: ' + e.message, e);
+        d.on('error', function(e) {
+            node.error(`Emulation error: ${e.message}`, e);
             node.status({
                 fill: 'red',
                 shape: 'dot',
@@ -64,22 +60,24 @@ module.exports = function (RED) {
             });
         });
 
-        var connection = null;
-        d.run(function () {
+        let connection = null;
+        d.run(function() {
             // {friendlyName: "TV", port: 9001, serial: 'a unique id'}
-            connection = wemore.Emulate(config)
-                .on('listening', function () {
+            connection = wemore
+                .Emulate(config)
+                .on('listening', function() {
                     node.status({
                         fill: 'yellow',
                         shape: 'dot',
-                        text: 'Listen on ' + this.port
+                        text: `Listen on ${this.port}`
                     });
-                    debug('Listening on: ' + this.port);
+                    debug(`Listening on: ${this.port}`);
                 })
-                .on('on', function () {
+                .on('on', function(self, sender) {
                     node.send({
                         topic: config.onTopic,
-                        payload: config.onPayload
+                        payload: config.onPayload,
+                        sender: sender
                     });
                     node.status({
                         fill: 'green',
@@ -88,10 +86,11 @@ module.exports = function (RED) {
                     });
                     debug('Turning on');
                 })
-                .on('off', function () {
+                .on('off', function(self, sender) {
                     node.send({
                         topic: config.offTopic,
-                        payload: config.offPayload
+                        payload: config.offPayload,
+                        sender: sender
                     });
                     node.status({
                         fill: 'green',
@@ -102,11 +101,11 @@ module.exports = function (RED) {
                 });
         });
 
-        node.on('close', function () {
+        node.on('close', function() {
             debug('Closing connection');
             connection.close();
-            debug('Closing domain');
-            d.dispose();
+            // debug('Closing domain');
+            // d.dispose();
             debug('Closed');
         });
     });

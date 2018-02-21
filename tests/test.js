@@ -26,9 +26,9 @@
 var mock = require('node-red-contrib-mock-node');
 var nodeRedModule = require('../index.js');
 
-describe('wemo-emulator', function () {
+describe('wemo-emulator', function() {
     this.timeout(10000);
-    it('should configure', function (done) {
+    it('should configure', function(done) {
         var node = mock(nodeRedModule, {
             name: 'test',
             friendlyName: 'test',
@@ -42,7 +42,7 @@ describe('wemo-emulator', function () {
         node.context().global.set('wemo-emulator', {
             debug: true
         });
-        setTimeout(function () {
+        setTimeout(function() {
             node.emit('close');
             done();
         }, 2000);

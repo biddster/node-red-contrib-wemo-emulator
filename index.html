@@ -66,41 +66,49 @@ THE SOFTWARE.
 <script type="text/x-red" data-template-name="wemo-emulator">
 
     <div class="form-row">
-        <label for="node-input-name"><i class="icon-tag"></i>Node Name</label>
+        <label for="node-input-name">
+            <i class="icon-tag"></i>Node Name</label>
         <input type="text" id="node-input-name" placeholder="Name">
     </div>
 
     <hr>
     <div class="form-row">
-        <label for="node-input-friendlyName"><i class="icon-tag"></i>Friendly Name *</label>
+        <label for="node-input-friendlyName">
+            <i class="icon-tag"></i>Friendly Name *</label>
         <input type="text" id="node-input-friendlyName" placeholder="Friendly Name">
     </div>
     <div class="form-row">
-        <label for="node-input-serial"><i class="fa fa-globe"></i> Unique ID *</label>
+        <label for="node-input-serial">
+            <i class="fa fa-globe"></i> Unique ID *</label>
         <input type="text" id="node-input-serial" placeholder="Unique ID">
     </div>
     <div class="form-row">
-        <label for="node-input-port"><i class="fa fa-globe"></i> Port *</label>
+        <label for="node-input-port">
+            <i class="fa fa-globe"></i> Port *</label>
         <input type="text" id="node-input-port" placeholder="Port">
     </div>
 
     <hr>
     <div class="form-row">
-        <label for="node-input-onTopic"><i class="icon-tag"></i>On Topic</label>
+        <label for="node-input-onTopic">
+            <i class="icon-tag"></i>On Topic</label>
         <input type="text" id="node-input-onTopic" placeholder="">
     </div>
     <div class="form-row">
-        <label for="node-input-onPayload"><i class="icon-tag"></i>On Payload</label>
+        <label for="node-input-onPayload">
+            <i class="icon-tag"></i>On Payload</label>
         <input type="text" id="node-input-onPayload" placeholder="">
     </div>
 
     <hr>
     <div class="form-row">
-        <label for="node-input-offTopic"><i class="icon-tag"></i>Off Topic</label>
+        <label for="node-input-offTopic">
+            <i class="icon-tag"></i>Off Topic</label>
         <input type="text" id="node-input-offTopic" placeholder="">
     </div>
     <div class="form-row">
-        <label for="node-input-offPayload"><i class="icon-tag"></i>Off Payload</label>
+        <label for="node-input-offPayload">
+            <i class="icon-tag"></i>Off Payload</label>
         <input type="text" id="node-input-offPayload" placeholder="">
     </div>
 
@@ -132,38 +140,54 @@ THE SOFTWARE.
                 </thead>
                 <tbody>
                     <tr>
-                        <td><code>Node Name</code></td>
+                        <td>
+                            <code>Node Name</code>
+                        </td>
                         <td>This is the name of the node as it appears in the Node-RED workspace</td>
                     </tr>
                     <tr>
-                        <td><code>Friendly Name</code></td>
+                        <td>
+                            <code>Friendly Name</code>
+                        </td>
                         <td>This is the name that you'll see in the list of devices known to Alexa, it's also the name that you
                             use in voice commands</td>
                     </tr>
                     <tr>
-                        <td><code>Unique ID</code></td>
+                        <td>
+                            <code>Unique ID</code>
+                        </td>
                         <td>This ID should be unique across all the wemo-emulator nodes in your workspace</td>
                     </tr>
                     <tr>
-                        <td><code>Port</code></td>
+                        <td>
+                            <code>Port</code>
+                        </td>
                         <td>Wemore can automatically select a port to listen on, but it is recommended that you enter a unique
                             port and increment it for each wemo emulator node you add to your workspace. This ensures that
                             the port never changes.</td>
                     </tr>
                     <tr>
-                        <td><code>On Topic</code></td>
+                        <td>
+                            <code>On Topic</code>
+                        </td>
                         <td>This is the topic sent when you ask Alexa to turn your thing on</td>
                     </tr>
                     <tr>
-                        <td><code>On Payload</code></td>
+                        <td>
+                            <code>On Payload</code>
+                        </td>
                         <td>This is the payload sent when you ask Alexa to turn your thing on</td>
                     </tr>
                     <tr>
-                        <td><code>Off Topic</code></td>
+                        <td>
+                            <code>Off Topic</code>
+                        </td>
                         <td>This is the topic sent when you ask Alexa to turn your thing off</td>
                     </tr>
                     <tr>
-                        <td><code>Off Payload</code></td>
+                        <td>
+                            <code>Off Payload</code>
+                        </td>
                         <td>This is the payload sent when you ask Alexa to turn your thing off</td>
                     </tr>
                 </tbody>
