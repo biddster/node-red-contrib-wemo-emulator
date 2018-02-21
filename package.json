@@ -1,6 +1,6 @@
 {
     "name": "node-red-contrib-wemo-emulator",
-    "version": "0.5.0",
+    "version": "0.5.1",
     "main": "index.js",
     "keywords": ["node-red", "wemo", "emulator", "amazon", "echo", "alexa"],
     "scripts": {
