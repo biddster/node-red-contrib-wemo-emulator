@@ -4,7 +4,8 @@
     "main": "index.js",
     "keywords": ["node-red", "wemo", "emulator", "amazon", "echo", "alexa"],
     "scripts": {
-        "test": "node_modules/.bin/mocha -R spec ./tests/test.js"
+        "test":
+            "nyc --reporter=html ./node_modules/mocha/bin/mocha test --recursive --reporter spec"
     },
     "dependencies": {
         "lodash": "^4.17.4",
@@ -30,6 +31,7 @@
         "eslint-config-prettier": "^2.9.0",
         "mocha": "^5.0.0",
         "node-red-contrib-mock-node": "^0.4.0",
+        "nyc": "^11.4.1",
         "prettier": "^1.10.2"
     },
     "eslintConfig": {
