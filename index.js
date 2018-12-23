@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function,new-cap,consistent-this */
 /**
  The MIT License (MIT)
 
@@ -42,8 +43,8 @@ module.exports = function(RED) {
             return _.assign(globalConfig, node.context().global.get('wemo-emulator'));
         }
 
-        function debug() {
-            if (getGlobalConfig().debug) node.log.apply(node, arguments);
+        function debug(args) {
+            if (getGlobalConfig().debug) node.log(...args);
         }
 
         // Address in use errors occur when ports clash. They stop node dead so we use a domain to notify the user.
@@ -77,7 +78,7 @@ module.exports = function(RED) {
                     node.send({
                         topic: config.onTopic,
                         payload: config.onPayload,
-                        sender: sender
+                        sender
                     });
                     node.status({
                         fill: 'green',
@@ -90,7 +91,7 @@ module.exports = function(RED) {
                     node.send({
                         topic: config.offTopic,
                         payload: config.offPayload,
-                        sender: sender
+                        sender
                     });
                     node.status({
                         fill: 'green',
