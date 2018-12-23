@@ -1,6 +1,6 @@
 {
     "name": "node-red-contrib-wemo-emulator",
-    "version": "0.6.0",
+    "version": "0.7.0",
     "main": "index.js",
     "keywords": [
         "node-red",
@@ -14,8 +14,8 @@
         "test": "nyc --reporter=html ./node_modules/mocha/bin/mocha test --recursive --reporter spec"
     },
     "dependencies": {
-        "lodash": "^4.17.10",
-        "wemore": "^0.6.0"
+        "lodash": "^4.17.11",
+        "wemore": "0.6.1"
     },
     "author": "@biddster",
     "license": "MIT",
@@ -32,13 +32,13 @@
         }
     },
     "devDependencies": {
-        "eslint": "^5.0.0",
+        "eslint": "^5.10.0",
         "eslint-config-biddster": "^0.6.0",
-        "eslint-config-prettier": "^2.9.0",
+        "eslint-config-prettier": "^3.3.0",
         "mocha": "^5.2.0",
         "node-red-contrib-mock-node": "^0.4.0",
-        "nyc": "^12.0.2",
-        "prettier": "^1.13.6"
+        "nyc": "^13.1.0",
+        "prettier": "^1.15.3"
     },
     "eslintConfig": {
         "env": {
