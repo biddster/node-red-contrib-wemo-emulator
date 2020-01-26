@@ -15,9 +15,8 @@
         "test": "nyc --reporter=html ./node_modules/mocha/bin/mocha test --recursive --reporter spec"
     },
     "dependencies": {
-        "lodash": "^4.17.11",
-        "node-fauxmo": "0.0.7",
-        "wemore": "0.6.1"
+        "lodash": "^4.17.15",
+        "wemore": "0.6.2"
     },
     "author": "@biddster",
     "license": "MIT",
@@ -34,13 +33,13 @@
         }
     },
     "devDependencies": {
-        "eslint": "^5.10.0",
+        "eslint": "^6.8.0",
         "eslint-config-biddster": "^0.6.0",
-        "eslint-config-prettier": "^3.3.0",
-        "mocha": "^5.2.0",
+        "eslint-config-prettier": "^6.9.0",
+        "mocha": "^7.0.1",
         "node-red-contrib-mock-node": "^0.4.0",
-        "nyc": "^13.1.0",
-        "prettier": "^1.15.3"
+        "nyc": "^15.0.0",
+        "prettier": "^1.19.1"
     },
     "eslintConfig": {
         "env": {
