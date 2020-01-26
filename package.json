@@ -11,10 +11,12 @@
         "alexa"
     ],
     "scripts": {
+        "start": "mkdir -p .node-red/node_modules && ln -sf $PWD $PWD/.node-red/node_modules/node-red-contrib-wemo-emulator && node-red -u .node-red",
         "test": "nyc --reporter=html ./node_modules/mocha/bin/mocha test --recursive --reporter spec"
     },
     "dependencies": {
         "lodash": "^4.17.11",
+        "node-fauxmo": "0.0.7",
         "wemore": "0.6.1"
     },
     "author": "@biddster",
