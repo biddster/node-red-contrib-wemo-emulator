@@ -26,11 +26,11 @@
 
 const crypto = require('crypto');
 
-function uuidFromPort(port) {
+function uuidFromSerial(serial) {
     // Many thanks to https://github.com/lspiehler/node-fauxmo/blob/master/src/deviceSerial.js
     const rawserial = crypto
         .createHash('md5')
-        .update(JSON.stringify(port))
+        .update(JSON.stringify(serial))
         .digest('hex');
     return `${rawserial.substring(0, 8)}-${rawserial.substring(8, 12)}-${rawserial.substring(
         12,
@@ -76,7 +76,7 @@ module.exports = function(RED) {
 
         let connection = null;
         d.run(function() {
-            config.uuid = uuidFromPort(config.port);
+            config.uuid = uuidFromSerial(config.serial);
             // console.log(config.uuid);
             // {friendlyName: "TV", port: 9001, serial: 'a unique id'}
             connection = wemore
