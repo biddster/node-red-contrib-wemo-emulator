@@ -24,11 +24,24 @@
  */
 'use strict';
 
+const crypto = require('crypto');
+
+function uuidFromPort(port) {
+    // Many thanks to https://github.com/lspiehler/node-fauxmo/blob/master/src/deviceSerial.js
+    const rawserial = crypto
+        .createHash('md5')
+        .update(JSON.stringify(port))
+        .digest('hex');
+    return `${rawserial.substring(0, 8)}-${rawserial.substring(8, 12)}-${rawserial.substring(
+        12,
+        16
+    )}-${rawserial.substring(16, 20)}-${rawserial.substring(20, 32)}`;
+}
+
 module.exports = function(RED) {
     const wemore = require('wemore'),
         domain = require('domain'),
         _ = require('lodash');
-
     // For each wemore.Emulate we create, wemore registers a process exit listener. By default, node
     // only supports 10 exit listeners and we are likely to want to emulate many more devices than that.
     // https://github.com/biddster/node-red-contrib-wemo-emulator/issues/8
@@ -63,6 +76,8 @@ module.exports = function(RED) {
 
         let connection = null;
         d.run(function() {
+            config.uuid = uuidFromPort(config.port);
+            // console.log(config.uuid);
             // {friendlyName: "TV", port: 9001, serial: 'a unique id'}
             connection = wemore
                 .Emulate(config)
