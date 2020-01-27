@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function,new-cap,consistent-this */
 /**
  The MIT License (MIT)
 
@@ -26,7 +27,28 @@
 module.exports = function(RED) {
     const wemore = require('wemore'),
         domain = require('domain'),
-        _ = require('lodash');
+        _ = require('lodash'),
+        crypto = require('crypto');
+
+    function uuidFromSerial(serial) {
+        // Many thanks to https://github.com/lspiehler/node-fauxmo/blob/master/src/deviceSerial.js
+        const rawserial = crypto
+            .createHash('md5')
+            .update(serial)
+            .digest('hex');
+        return (
+            // eslint-disable-next-line prefer-template
+            rawserial.substring(0, 8) +
+            '-' +
+            rawserial.substring(8, 12) +
+            '-' +
+            rawserial.substring(12, 16) +
+            '-' +
+            rawserial.substring(16, 20) +
+            '-' +
+            rawserial.substring(20, 32)
+        );
+    }
 
     // For each wemore.Emulate we create, wemore registers a process exit listener. By default, node
     // only supports 10 exit listeners and we are likely to want to emulate many more devices than that.
@@ -42,8 +64,8 @@ module.exports = function(RED) {
             return _.assign(globalConfig, node.context().global.get('wemo-emulator'));
         }
 
-        function debug() {
-            if (getGlobalConfig().debug) node.log.apply(node, arguments);
+        function debug(args) {
+            if (getGlobalConfig().debug) node.log(...args);
         }
 
         // Address in use errors occur when ports clash. They stop node dead so we use a domain to notify the user.
@@ -62,6 +84,9 @@ module.exports = function(RED) {
 
         let connection = null;
         d.run(function() {
+            config.uuid = uuidFromSerial(config.serial);
+            debug(`UUID [${config.serial}] => [${config.uuid}]`);
+            // console.log(config.uuid);
             // {friendlyName: "TV", port: 9001, serial: 'a unique id'}
             connection = wemore
                 .Emulate(config)
@@ -77,7 +102,7 @@ module.exports = function(RED) {
                     node.send({
                         topic: config.onTopic,
                         payload: config.onPayload,
-                        sender: sender
+                        sender
                     });
                     node.status({
                         fill: 'green',
@@ -90,7 +115,7 @@ module.exports = function(RED) {
                     node.send({
                         topic: config.offTopic,
                         payload: config.offPayload,
-                        sender: sender
+                        sender
                     });
                     node.status({
                         fill: 'green',
