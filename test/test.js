@@ -23,13 +23,13 @@
  */
 
 'use strict';
-var mock = require('node-red-contrib-mock-node');
-var nodeRedModule = require('../index.js');
+const mock = require('node-red-contrib-mock-node');
+const nodeRedModule = require('../index.js');
 
 describe('wemo-emulator', function() {
     this.timeout(10000);
     it('should configure', function(done) {
-        var node = mock(nodeRedModule, {
+        const node = mock(nodeRedModule, {
             name: 'test',
             friendlyName: 'test',
             serial: '111111',
@@ -43,6 +43,7 @@ describe('wemo-emulator', function() {
             debug: true
         });
         setTimeout(function() {
+            node.con;
             node.emit('close');
             done();
         }, 2000);

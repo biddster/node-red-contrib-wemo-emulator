@@ -55,7 +55,7 @@ THE SOFTWARE.
         inputs: 0,
         outputs: 1,
         icon: 'wemo.png',
-        label: function () {
+        label: function() {
             return this.name || 'wemo-emulator';
         },
         paletteLabel: 'wemo emu',
@@ -111,11 +111,11 @@ THE SOFTWARE.
             <i class="icon-tag"></i>Off Payload</label>
         <input type="text" id="node-input-offPayload" placeholder="">
     </div>
-
 </script>
 
 <script type="text/x-red" data-help-name="wemo-emulator">
     <h1>Wemo Emulator</h1>
+    <p><em>NOTE</em> if you're upgrading from a version prior to 1.0.0, it is recommended that you get Alexa to forget all devices and rediscover. This is due to the fix to prevent duplicated wemo-emulator devices appearing in the Alexa app.</p>
     <p> Why might you want to emulate Wemo? Well I wanted to be able to control my Node-RED Raspberry Pi using my Amazon Echo.
         The Echo has Wemo support built in so I thought I'd give it a try.
         <p>

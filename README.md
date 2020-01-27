@@ -1,5 +1,7 @@
 # node-red-contrib-wemo-emulator
 
+**NOTE** if you're upgrading from a version prior to 1.0.0, it is recommended that you get Alexa to forget all devices and rediscover. This is due to the fix to prevent duplicated wemo-emulator devices appearing in the Alexa app.
+
 Why might you want to emulate Wemo? Well I wanted to be able to control my Node-RED Raspberry Pi using my Amazon Echo. The
 Echo has Wemo support built in so I thought I'd give it a try.
 
@@ -32,8 +34,8 @@ Drag the node on to your workspace, configure it as below and then ask Alexa to 
 
 If Alexa can't discover the devices emulated by this node, please check you don't have a firewall blocking the following ports:
 
-* 1900/udp
-* You must also open the ports for all of the wemo emulator nodes configured
+-   1900/udp
+-   You must also open the ports for all of the wemo emulator nodes configured
 
 ### Enabling extra debugging
 

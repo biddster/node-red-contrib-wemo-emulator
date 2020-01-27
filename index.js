@@ -24,24 +24,32 @@
  */
 'use strict';
 
-const crypto = require('crypto');
-
-function uuidFromSerial(serial) {
-    // Many thanks to https://github.com/lspiehler/node-fauxmo/blob/master/src/deviceSerial.js
-    const rawserial = crypto
-        .createHash('md5')
-        .update(JSON.stringify(serial))
-        .digest('hex');
-    return `${rawserial.substring(0, 8)}-${rawserial.substring(8, 12)}-${rawserial.substring(
-        12,
-        16
-    )}-${rawserial.substring(16, 20)}-${rawserial.substring(20, 32)}`;
-}
-
 module.exports = function(RED) {
     const wemore = require('wemore'),
         domain = require('domain'),
-        _ = require('lodash');
+        _ = require('lodash'),
+        crypto = require('crypto');
+
+    function uuidFromSerial(serial) {
+        // Many thanks to https://github.com/lspiehler/node-fauxmo/blob/master/src/deviceSerial.js
+        const rawserial = crypto
+            .createHash('md5')
+            .update(serial)
+            .digest('hex');
+        return (
+            // eslint-disable-next-line prefer-template
+            rawserial.substring(0, 8) +
+            '-' +
+            rawserial.substring(8, 12) +
+            '-' +
+            rawserial.substring(12, 16) +
+            '-' +
+            rawserial.substring(16, 20) +
+            '-' +
+            rawserial.substring(20, 32)
+        );
+    }
+
     // For each wemore.Emulate we create, wemore registers a process exit listener. By default, node
     // only supports 10 exit listeners and we are likely to want to emulate many more devices than that.
     // https://github.com/biddster/node-red-contrib-wemo-emulator/issues/8
@@ -77,6 +85,7 @@ module.exports = function(RED) {
         let connection = null;
         d.run(function() {
             config.uuid = uuidFromSerial(config.serial);
+            debug(`UUID [${config.serial}] => [${config.uuid}]`);
             // console.log(config.uuid);
             // {friendlyName: "TV", port: 9001, serial: 'a unique id'}
             connection = wemore
