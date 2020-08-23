@@ -12,10 +12,12 @@
     ],
     "scripts": {
         "start": "mkdir -p .node-red/node_modules && ln -sf $PWD $PWD/.node-red/node_modules/node-red-contrib-wemo-emulator && node-red -u .node-red",
-        "test": "nyc --reporter=html ./node_modules/mocha/bin/mocha test --recursive --reporter spec"
+        "test": "nyc --reporter=html ./node_modules/mocha/bin/mocha test --recursive --reporter spec",
+        "update-dependencies": "./node_modules/.bin/ncu -u && npm install",
+        "lint": "eslint ."
     },
     "dependencies": {
-        "lodash": "^4.17.15",
+        "lodash": "^4.17.20",
         "wemore": "0.6.2"
     },
     "author": "@biddster",
@@ -33,28 +35,60 @@
         }
     },
     "devDependencies": {
-        "eslint": "^6.8.0",
-        "eslint-config-biddster": "^0.6.0",
-        "eslint-config-prettier": "^6.9.0",
-        "mocha": "^7.0.1",
+        "@hapi/eslint-config-hapi": "13.0.2",
+        "@hapi/eslint-plugin-hapi": "4.3.5",
+        "babel-eslint": "10.1.0",
+        "eslint": "^7.7.0",
+        "husky": "^4.2.5",
+        "lint-staged": "^10.2.11",
+        "mocha": "^8.1.1",
         "node-red-contrib-mock-node": "^0.4.0",
-        "nyc": "^15.0.0",
-        "prettier": "^1.19.1"
+        "npm-check-updates": "^7.1.1",
+        "nyc": "^15.1.0",
+        "prettier": "^2.0.5"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
+        }
     },
     "eslintConfig": {
-        "env": {
-            "es6": true,
-            "node": true,
-            "mocha": true
+        "extends": "@hapi/eslint-config-hapi",
+        "parser": "babel-eslint",
+        "parserOptions": {
+            "ecmaVersion": 2020,
+            "sourceType": "script"
         },
-        "extends": [
-            "eslint-config-biddster/es6-node",
-            "prettier"
+        "overrides": [
+            {
+                "files": [
+                    "*.js"
+                ],
+                "rules": {
+                    "@hapi/hapi/scope-start": "off",
+                    "comma-dangle": "off",
+                    "brace-style": "off"
+                }
+            }
         ]
     },
     "prettier": {
         "singleQuote": true,
         "tabWidth": 4,
         "printWidth": 96
+    },
+    "nyc": {
+        "exclude": "tests/**"
+    },
+    "lint-staged": {
+        "*.js": [
+            "prettier --write",
+            "eslint",
+            "git add"
+        ],
+        "*.{md,html,json}": [
+            "prettier --write",
+            "git add"
+        ]
     }
 }
