@@ -96,7 +96,7 @@ module.exports = function (RED) {
                     });
                     debug(`Listening on: ${this.port}`);
                 })
-                .on('on', (self, sender) => {
+                .on('on', (_self, sender) => {
                     node.send({
                         topic: config.onTopic,
                         payload: config.onPayload,
@@ -109,7 +109,7 @@ module.exports = function (RED) {
                     });
                     debug('Turning on');
                 })
-                .on('off', (self, sender) => {
+                .on('off', (_self, sender) => {
                     node.send({
                         topic: config.offTopic,
                         payload: config.offPayload,
