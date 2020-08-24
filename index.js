@@ -1,5 +1,4 @@
 /* eslint-disable max-lines-per-function,new-cap,consistent-this */
-'use strict';
 /**
  The MIT License (MIT)
 

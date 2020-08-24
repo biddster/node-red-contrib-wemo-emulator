@@ -45,7 +45,7 @@
         "node-red-contrib-mock-node": "^0.4.0",
         "npm-check-updates": "^7.1.1",
         "nyc": "^15.1.0",
-        "prettier": "^2.0.5"
+        "prettier": "^2.1.0"
     },
     "husky": {
         "hooks": {
@@ -67,7 +67,8 @@
                 "rules": {
                     "@hapi/hapi/scope-start": "off",
                     "comma-dangle": "off",
-                    "brace-style": "off"
+                    "brace-style": "off",
+                    "strict": "off"
                 }
             }
         ]

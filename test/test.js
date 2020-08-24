@@ -24,8 +24,6 @@
  THE SOFTWARE.
  */
 
-'use strict';
-
 const Mock = require('node-red-contrib-mock-node');
 const NodeRedModule = require('../index.js');
 
