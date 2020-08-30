@@ -22,20 +22,16 @@
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  THE SOFTWARE.
  */
-'use strict';
 
-module.exports = function(RED) {
-    const wemore = require('wemore'),
-        domain = require('domain'),
-        _ = require('lodash'),
-        crypto = require('crypto');
+module.exports = function (RED) {
+    const Wemore = require('wemore');
+    const Domain = require('domain');
+    const _ = require('lodash');
+    const Crypto = require('crypto');
 
-    function uuidFromSerial(serial) {
+    const uuidFromSerial = function (serial) {
         // Many thanks to https://github.com/lspiehler/node-fauxmo/blob/master/src/deviceSerial.js
-        const rawserial = crypto
-            .createHash('md5')
-            .update(serial)
-            .digest('hex');
+        const rawserial = Crypto.createHash('md5').update(serial).digest('hex');
         return (
             // eslint-disable-next-line prefer-template
             rawserial.substring(0, 8) +
@@ -48,85 +44,86 @@ module.exports = function(RED) {
             '-' +
             rawserial.substring(20, 32)
         );
-    }
+    };
 
     // For each wemore.Emulate we create, wemore registers a process exit listener. By default, node
     // only supports 10 exit listeners and we are likely to want to emulate many more devices than that.
     // https://github.com/biddster/node-red-contrib-wemo-emulator/issues/8
     process.setMaxListeners(0);
 
-    RED.nodes.registerType('wemo-emulator', function(config) {
+    RED.nodes.registerType('wemo-emulator', function (config) {
         RED.nodes.createNode(this, config);
-        const node = this,
-            globalConfig = { debug: false };
+        const node = this;
+        const globalConfig = { debug: false };
 
-        function getGlobalConfig() {
+        const getGlobalConfig = function () {
             return _.assign(globalConfig, node.context().global.get('wemo-emulator'));
-        }
+        };
 
-        function debug(args) {
-            if (getGlobalConfig().debug) node.log(...args);
-        }
+        const debug = function (args) {
+            if (getGlobalConfig().debug) {
+                node.log(...args);
+            }
+        };
 
         // Address in use errors occur when ports clash. They stop node dead so we use a domain to notify the user.
         // Otherwise NodeRED won't start and that's hard to debug.
         // Note that domains are deprecated in v7. So we'll have to port to whatever replaces them in the future.
-        const d = domain.create();
+        const d = Domain.create();
 
-        d.on('error', function(e) {
+        d.on('error', (e) => {
             node.error(`Emulation error: ${e.message}`, e);
             node.status({
                 fill: 'red',
                 shape: 'dot',
-                text: e.message
+                text: e.message,
             });
         });
 
         let connection = null;
-        d.run(function() {
+        d.run(() => {
             config.uuid = uuidFromSerial(config.serial);
             debug(`UUID [${config.serial}] => [${config.uuid}]`);
             // console.log(config.uuid);
             // {friendlyName: "TV", port: 9001, serial: 'a unique id'}
-            connection = wemore
-                .Emulate(config)
-                .on('listening', function() {
+            connection = Wemore.Emulate(config)
+                .on('listening', function () {
                     node.status({
                         fill: 'yellow',
                         shape: 'dot',
-                        text: `Listen on ${this.port}`
+                        text: `Listen on ${this.port}`,
                     });
                     debug(`Listening on: ${this.port}`);
                 })
-                .on('on', function(self, sender) {
+                .on('on', (_self, sender) => {
                     node.send({
                         topic: config.onTopic,
                         payload: config.onPayload,
-                        sender
+                        sender,
                     });
                     node.status({
                         fill: 'green',
                         shape: 'dot',
-                        text: 'on'
+                        text: 'on',
                     });
                     debug('Turning on');
                 })
-                .on('off', function(self, sender) {
+                .on('off', (_self, sender) => {
                     node.send({
                         topic: config.offTopic,
                         payload: config.offPayload,
-                        sender
+                        sender,
                     });
                     node.status({
                         fill: 'green',
                         shape: 'circle',
-                        text: 'off'
+                        text: 'off',
                     });
                     debug('Turning off');
                 });
         });
 
-        node.on('close', function() {
+        node.on('close', () => {
             debug('Closing connection');
             connection.close();
             // debug('Closing domain');

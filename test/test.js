@@ -1,3 +1,5 @@
+/* eslint-disable prefer-arrow-callback */
+/* eslint-disable no-undef */
 /**
  The MIT License (MIT)
 
@@ -22,14 +24,13 @@
  THE SOFTWARE.
  */
 
-'use strict';
-const mock = require('node-red-contrib-mock-node');
-const nodeRedModule = require('../index.js');
+const Mock = require('node-red-contrib-mock-node');
+const NodeRedModule = require('../index.js');
 
-describe('wemo-emulator', function() {
+describe('wemo-emulator', function () {
     this.timeout(10000);
-    it('should configure', function(done) {
-        const node = mock(nodeRedModule, {
+    it('should configure', function (done) {
+        const node = Mock(NodeRedModule, {
             name: 'test',
             friendlyName: 'test',
             serial: '111111',
@@ -37,13 +38,12 @@ describe('wemo-emulator', function() {
             onTopic: 'on topic',
             onPayload: 'on payload',
             offTopic: 'off topic',
-            offPayload: 'off payload'
+            offPayload: 'off payload',
         });
         node.context().global.set('wemo-emulator', {
-            debug: true
+            debug: true,
         });
-        setTimeout(function() {
-            node.con;
+        setTimeout(function () {
             node.emit('close');
             done();
         }, 2000);
