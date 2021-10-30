@@ -37,6 +37,8 @@ If Alexa can't discover the devices emulated by this node, please check you don'
 -   1900/udp
 -   You must also open the ports for all of the wemo emulator nodes configured
 
+Alexa searches for devices using SSDP, this means that if your node-red installation is inside a Docker container you need to be careful around configuration in order to make the node "discoverable".  One way to do this is to configure the container to be in network_mode: "host", this allows it direct access to the ports of the device that is hosting it and makes it discoverable (although this takes it off of bridge networks within docker so communication with the other containers needs to be via localhost etc).
+
 ### Enabling extra debugging
 
 Install `node-red-contrib-config` and drag a config node into your workspace. Configure the node to set a global variable called `wemo-emulator`
